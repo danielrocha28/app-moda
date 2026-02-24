@@ -1,2 +1,4 @@
 # app-moda
-implementação de um projeto do zero que fala sobre moda textil
+Um problema recorrente na indústria têxtil e nos centros de distribuição é a ocorrência de perdas logísticas que podem atingir entre 10% e 15% das cargas, especialmente em decorrência de umidade excessiva e condensação durante armazenamento e transporte. Além do prejuízo financeiro direto, essas perdas resultam em aumento do descarte de produtos, tornando o investimento em sistemas de monitoramento preventivo significativamente inferior ao custo de uma coleção comprometida.
+Nesse contexto, o sistema proposto permite a tomada de decisões baseadas em dados concretos. Ao identificar o aumento da umidade relativa e a aproximação do ponto de orvalho, o gestor pode agir preventivamente, acionando desumidificadores ou ajustando a ventilação antes que ocorra a formação de mofo. Dessa forma, a solução contribui para a redução de desperdícios, preservação da qualidade dos produtos e fortalecimento da sustentabilidade da operação, podendo ser aplicada tanto em estoques quanto em processos de transporte.
+
