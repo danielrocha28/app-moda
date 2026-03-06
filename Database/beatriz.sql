@@ -1,7 +1,17 @@
 create database PI;
+use database PI;
 
 CREATE TABLE Clientes (
 idCliente INT PRIMARY KEY AUTO_INCREMENT,
+nomeEmpresa VARCHAR (45) NOT NULL,
+email VARCHAR (45) NOT NULL UNIQUE,
+senha VARCHAR (45) NOT NULL DEFAULT NOW(), 
+dtCriacao DATETIME 
+); 
+
+
+CREATE TABLE Funcionarios (
+idFuncionario INT PRIMARY KEY AUTO_INCREMENT,
 nomeEmpresa VARCHAR (45) NOT NULL,
 email VARCHAR (45) NOT NULL UNIQUE,
 senha VARCHAR (45) NOT NULL DEFAULT NOW(), 
@@ -20,15 +30,16 @@ CREATE TABLE sensores (
 idSensor INT PRIMARY KEY AUTO_INCREMENT,
 modeloSensor VARCHAR (5) 
 	CONSTRAINT chkSensor CHECK (modeloSensor IN("DHT11", "LM35")),
-idLocal INT, 
+idLugar INT, 
+tipoSensor VARCHAR (5)
 dtInstalacao DATETIME 
 );
 
 CREATE TABLE medicoes (
 idMedicao INT PRIMARY KEY AUTO_INCREMENT,
-idSensorM INT, 
-temperatura DECIMAL (3,1) NOT NULL, 
-umidade DECIMAL (3,1) NOT NULL
+idSensor INT, 
+valores DECIMAL (3,1) NOT NULL, 
+unidadeDeMedida DECIMAL (3,1) NOT NULL
 );
 
 -- INSERTE E SELECT TESTE CLIENTES  
