@@ -1,12 +1,12 @@
 create database PI;
-use database PI;
+use PI;
 
 CREATE TABLE Clientes (
 idCliente INT PRIMARY KEY AUTO_INCREMENT,
 nomeEmpresa VARCHAR (45) NOT NULL,
 email VARCHAR (45) NOT NULL UNIQUE,
-senha VARCHAR (45) NOT NULL DEFAULT NOW(), 
-dtCriacao DATETIME 
+senha VARCHAR (45) NOT NULL, 
+dtCriacao DATETIME DEFAULT current_timestamp
 ); 
 
 
@@ -14,8 +14,8 @@ CREATE TABLE Funcionarios (
 idFuncionario INT PRIMARY KEY AUTO_INCREMENT,
 nomeEmpresa VARCHAR (45) NOT NULL,
 email VARCHAR (45) NOT NULL UNIQUE,
-senha VARCHAR (45) NOT NULL DEFAULT NOW(), 
-dtCriacao DATETIME 
+senha VARCHAR (45) NOT NULL, 
+dtCriacao DATETIME DEFAULT current_timestamp
 ); 
 
 CREATE TABLE lugares (
@@ -32,14 +32,16 @@ modeloSensor VARCHAR (5)
 	CONSTRAINT chkSensor CHECK (modeloSensor IN("DHT11", "LM35")),
 idLugar INT, 
 tipoSensor VARCHAR (5)
-dtInstalacao DATETIME 
+    CONSTRAINT chkSensor CHECK (tipoSensor IN("temp.", "umi.", "temp. e umi.")),
+dtInstalacao DATETIME DEFAULT current_timestamp
 );
 
 CREATE TABLE medicoes (
 idMedicao INT PRIMARY KEY AUTO_INCREMENT,
 idSensor INT, 
-valores DECIMAL (3,1) NOT NULL, 
-unidadeDeMedida DECIMAL (3,1) NOT NULL
+valores DECIMAL (5,2) NOT NULL, 
+unidadeDeMedida VARCHAR (15) NOT NULL,
+dtMedicoes DATETIME DEFAULT current_timestamp
 );
 
 -- INSERTE E SELECT TESTE CLIENTES  
@@ -63,28 +65,31 @@ SELECT
 FROM lugares;
 
 -- INSERT E SELECT TESTE SENSOR 
-INSERT INTO sensores (modeloSensor, idLocal, dtInstalacao)
-VALUES ("DHT11", 1, "2026-08-14");
+INSERT INTO sensores (modeloSensor, idLugar, idSensor, dtInstalacao)
+VALUES ("DHT11", 1,"temp. e umi.", "2026-08-14");
 
 SELECT 
 	modeloSensor AS "Sensor Utilizado",
-    idLocal AS "Local Instalado",
+    idLugar AS "Local Instalado",
+    tipoSensor AS "Tipo De Sensor",
     dtInstalacao AS "Data De Instalação"
 FROM sensores;
 
 -- INSERT E SELECT TESTE DAS MEDIÇÕES 
-INSERT INTO medicoes (idSensorM, temperatura, umidade)
-VALUES (1, 27.5, 68);
+INSERT INTO medicoes (idSensorM, valores, unidadeDeMedida)
+VALUES (1, 27.5, "celsius"),
+	(1, 77.10 , "porcentagem");
 
 SELECT
 	idMedicao AS "Codido Medição",
-    temperatura AS "Temperatura Graus Celsius",
-    umidade AS "Valor Umidade"
+    valores AS "Valores",
+    unidadeDeMedida AS "Unidade De Medida"
 FROM medicoes; 
 
 -- APENAS AMBIENTES CRÍTICOS
 SELECT 
-	temperatura AS "Temperatura Graus Celsius",
-    umidade AS "Valor Umidade"
+    idSensor AS "Codigo Sensor",
+	valores AS "Valores",
+    unidadeDeMedida AS "Unidade De Medida"
 FROM medicoes WHERE umidade > 65;
     
