@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste01</title>
+</head>
+<body>
+    <h2>Cálculo de Economia Gerada com Monitoramento</h2>
+    Insira a quantidade de estoque atual da sua empresa: <input id ="ipt_estoque"> <br>
+    Insira o valor total do seu estoque: <input id ="ipt_valor"> <br>
+    <button onclick="analise()">Perda de estoque sem monitoramento</button> <br>
+    <button onclick="analise2()">Perda de estoque com monitoramento</button><br>
+    <div id="div_msg"></div>
+</body>
+</html>
+<script>
+    function analise() {
+        let ax_num1 = Number(ipt_estoque.value);
+        let ax_num2 = Number(ipt_valor.value);
+        let ax_perdas = ax_num1 * 0.04 
+        let ax_valorperdido = ax_num2 * 0.04
+
+        div_msg.innerHTML = `Sem monitoramento sua empresa perderá cerca de ${ax_perdas} produtos no estoque, o equivalente a R$${ax_valorperdido.toFixed(2)}.`
+   }
+   function analise2() {
+        let ax_num1 = Number(ipt_estoque.value);
+        let ax_num2 = Number(ipt_valor.value);
+        let ax_perdas = ax_num1 * 0.005 
+        let ax_valorperdido = ax_num2 * 0.005
+
+        div_msg.innerHTML = `Com monitoramento sua empresa perderá cerca de ${ax_perdas} produtos no estoque, o equivalente a R$${ax_valorperdido.toFixed(2)}.`
+   }
+</script>
