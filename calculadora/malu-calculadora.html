@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt_br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesquisa e Inovação Sprint1</title>
+</head>
+<body>
+   <h2>Calculadora Financeira Hygra</h2> 
+   Quantas peças são <b>armazenadas</b> no Estoque ou Container?
+   <input id="ipt_armazenamento"> <br>
+   <br>
+   Quantas peças são <b>perdidas</b> por conta de problemas com umidade?
+   <input id="ipt_prejuizo"> <br>
+   <br>
+   Qual o <b>valor</b> médio investido com os tecidos?
+   <input id="ipt_valor"> <br>
+   <br>
+   <button onclick="analisar()">Analisar Situação</button> <br>
+   <br>
+   <div id="div_msg"></div>
+</body>
+</html>
+<script>
+// Análise da perda com a umidade
+function analisar() {
+let ax_estoqueTotal = Number(ipt_armazenamento.value);
+let ax_estoquePerda = Number(ipt_prejuizo.value);
+let ax_valorMedio = Number(ipt_valor.value);
+
+let ax_prejuizoEstoque = ax_estoquePerda / ax_estoqueTotal;
+let ax_prejuizoMonetario = ax_prejuizoEstoque * ax_valorMedio;
+
+// Análise de perda com o monitoramento do sensor DHT11
+let ax_prejuizoMonitorado = ax_prejuizoMonetario * 0.005;
+
+// Registro final
+div_msg.innerHTML = `Baseados nos dados coletados e analisados, chega-se a esta conclusão: <br>
+O prejuízo que ocorre com suas peças devido ao mofo pode chegar aproximadamente na quantidade de ${ax_prejuizoEstoque} peças, e o prejuízo em média por evento destas perdas é de R$${ax_prejuizoMonetario.toFixed(2)}. <br><br>
+
+Todavia, com a <b>implementação da Hygra<b>, o monitoramento analítico destes mesmos dados pode reduzir o prejuízo e chegar no valor de R$${ax_prejuizoMonitorado}, beneficiando no controle de suas peças.`
+
+}
+</script>
