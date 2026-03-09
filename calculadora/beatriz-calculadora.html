@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt_br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesquisa e Inovação Sprint1</title>
+</head>
+<body>
+   <h2>Calculadora Financeira Hygra</h2> 
+   Quantas peças são <b>armazenadas</b> em seu local de armazenamenot?
+   <input id="ipt_armazenamento"> <br>
+   <br>
+   Quantas peças são <b>perdidas</b> por conta de problemas com umidade?
+   <input id="ipt_prejuizo"> <br>
+   <br>
+   <button onclick="analisar()">Analisar Minha Situação</button> <br>
+   <br>
+   <div id="div_msg"></div>
+</body>
+</html>
+<script>
+
+
+function analisar() {
+let estoqueTotal = Number(ipt_armazenamento.value);
+let estoquePerda = Number(ipt_prejuizo.value);
+
+let prejuizoEstoque = (estoquePerda / estoqueTotal)*100;
+
+div_msg.innerHTML = `Com os dados coletados percebemos que o prejuízo que ocorre com suas peças devido ao mofo <br> pode chegar aproximadamente na quantidade de ${prejuizoEstoque}% das peças!`
+}
+</script>
