@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-Br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+</head>
+<body>
+    <h1>Calculadora</h1> <br><br>
+    Insira o valor do estoque<input type="text" id="ipt_estoque"> <br><br>
+    Insira a quantidade perdida <input type="text" id="ipt_perda"> <br><br>
+
+    <button onclick="Calculadora()">Calcular</button><br><br>
+
+    <div id="div_msg"></div>
+</body>
+</html>
+
+<script>
+function Calculadora() {
+    let ax_calculadora = (Number(ipt_perda.value)/ Number(ipt_estoque.value)) * 100
+    div_msg.innerHTML = `Vocẽ perdeu ${ax_calculadora}%` 
+
+    
+    ipt_estoque.value = '';
+    ipt_perda.value = '';
+    
+}
+
+
+
+
+</script>
