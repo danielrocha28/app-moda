@@ -1,7 +1,7 @@
 create database PI;
 use PI;
 
-REATE TABLE Empresas (
+CREATE TABLE Empresas (
 idEmpresa INT PRIMARY KEY AUTO_INCREMENT,
 nomeEmpresa VARCHAR (45) NOT NULL,
 email VARCHAR (45) NOT NULL UNIQUE,
@@ -22,13 +22,6 @@ senha VARCHAR (45) NOT NULL,
 dtCriacao DATETIME DEFAULT current_timestamp
 ); 
 
-CREATE TABLE lugares (
-idLugar INT PRIMARY KEY AUTO_INCREMENT,
-nomeLugar VARCHAR (100),
-tipoLugar VARCHAR (15)
-	CONSTRAINT chkTipo CHECK (tipoLugar IN ('ESTOQUE', 'CONTAINER', 'ARMAZEM')),
-descricaoLugar VARCHAR(200)
-);
 
 CREATE TABLE lugares (
 idLugar INT PRIMARY KEY AUTO_INCREMENT,
@@ -41,9 +34,9 @@ descricaoLugar VARCHAR(200)
 CREATE TABLE sensores (
 idSensor INT PRIMARY KEY AUTO_INCREMENT,
 modeloSensor VARCHAR (5) 
-	CONSTRAINT chkSensor CHECK (modeloSensor IN('DHT11', 'LM35')),
+	CONSTRAINT chkModelo CHECK (modeloSensor IN('DHT11', 'LM35')),
 idLugar INT, 
-tipoSensor VARCHAR (5)
+tipoSensor VARCHAR (15)
 	CONSTRAINT chkSensor CHECK (tipoSensor IN('temp.', 'umi.', 'temp. e umi.')),
 dtInstalacao DATETIME default current_timestamp
 );
@@ -58,14 +51,14 @@ dtMedicoes DATETIME DEFAULT current_timestamp
 ); 
 
 -- INSERTE E SELECT TESTE CLIENTES  
-INSERT INTO Clientes (nomeEmpresa, email, senha, dtCriacao) 
+INSERT INTO Empresas (nomeEmpresa, email, senha, dtCriacao) 
 VALUES ('Renner', 'Renner@outlook.com', 'r0403@n', default);
 
 SELECT 
 	nomeEmpresa AS 'Nome Da Empresa',
     email AS 'E-MAIL',
     dtCriacao AS 'Data De Cadastdro' 
-FROM Clientes;
+FROM Empresas;
 
 -- INSERT E SELECT TESTE LUGARES 
 INSERT INTO lugares (nomeLugar, tipoLugar, descricaoLugar) 
@@ -89,14 +82,15 @@ SELECT
 FROM sensores;
 
 -- INSERT E SELECT TESTE DAS MEDIÇÕES 
-INSERT INTO medicoes (idSensor, valores, unidadeDeMedida)
-VALUES (1, 27.5, 'celsius'),
-	(1, 77.10 , 'porcentagem');
+INSERT INTO medicoes (idSensor, valores, unidadeDeMedida, pontoDeOrvalho)
+VALUES (1, 27.5, 'celsius', 22.3 ),
+	(1, 77.10 , 'porcentagem', 53.2);
 
 SELECT
     idSensor AS 'Codigo Sensor',
     valores AS 'Valores',
-    unidadeDeMedida AS 'Unidade De Medida'
+    unidadeDeMedida AS 'Unidade De Medida', 
+    pontoDeOrvalho AS 'Ponto De Orvalho'
 FROM medicoes; 
 
 -- APENAS AMBIENTES CRÍTICOS
