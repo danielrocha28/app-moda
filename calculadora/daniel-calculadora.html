@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculadora Financeira Hygra</title>
+  </head>
+
+  <body>
+    <h2>Projeto Hygra</h2>
+
+    <p>
+      A Hygra é uma solução de monitoramento de temperatura e umidade voltada
+      para estoques têxteis. O objetivo é identificar condições que favorecem
+      mofo e deterioração antes que os tecidos sejam danificados, reduzindo
+      perdas e prejuízos financeiros.
+    </p>
+
+    <p>
+      A calculadora abaixo estima o impacto financeiro dessas perdas no estoque
+      e demonstra o potencial de economia com o uso do monitoramento preventivo.
+    </p>
+
+    <hr />
+
+    <p>Qual é o valor médio total(R$) do estoque armazenado no local?</p>
+    <input type="text" id="ipt_valorMedioEstoque" /> <br />
+
+    <p>Aproximadamente quantas peças ficam armazenadas no estoque?</p>
+    <input type="text" id="ipt_pecasPorEstoque" /> <br />
+
+    <p>
+      Quando ocorre um problema de umidade/mofo/avaria, aproximadamente quantas
+      peças são afetadas?
+    </p>
+    <input type="text" id="ipt_pecasAfetadas" /> <br />
+
+    <p>Quantas vezes por ano ocorrem perdas relacionadas à umidade ou mofo?</p>
+    <input type="text" id="ipt_renovacaoAnual" /> <br />
+
+    <button onclick="calculoImpacto()">Avaliar Impacto</button> <br />
+
+    <div id="div_exibirImpacto"></div>
+  </body>
+
+  <script>
+    function calculoImpacto() {
+      let valorEstoque = Number(ipt_valorMedioEstoque.value);
+      let pecasTotais = Number(ipt_pecasPorEstoque.value);
+      let pecasPerdidas = Number(ipt_pecasAfetadas.value);
+      let renovacaoAnual = Number(ipt_renovacaoAnual.value);
+
+      let EstoquePerdido = pecasPerdidas / pecasTotais;
+      let perdaEmDinheiro = EstoquePerdido * valorEstoque;
+      let prejuizoAnual = perdaEmDinheiro * renovacaoAnual;
+
+      let percentualPerda = EstoquePerdido * 100;
+
+      let prejuizoComSensor = perdaEmDinheiro * 0.005;
+      let economia = prejuizoAnual - prejuizoComSensor * renovacaoAnual;
+
+      div_exibirImpacto.innerHTML = `
+  <h3>Diagnóstico do Impacto no Estoque</h3>
+
+  Seu estoque pode perder aproximadamente <b>${percentualPerda.toFixed(0)}%</b> de peças
+  quando ocorre um problema de umidade ou mofo.<br><br>
+
+  Prejuízo médio por evento: <b>R$ ${perdaEmDinheiro.toFixed(2)}</b><br>
+
+  Prejuízo anual estimado: <b>R$ ${prejuizoAnual.toFixed(2)}</b><br><br>
+
+  <h3>Com monitoramento Hygra</h3>
+
+  Ao identificar níveis críticos de umidade antes da deterioração do tecido,
+  é possível reduzir significativamente essas perdas.<br><br>
+
+  Prejuízo estimado com monitoramento: <b>R$ ${prejuizoComSensor.toFixed(2)}</b><br>
+
+  Economia potencial anual: <b>R$ ${economia.toFixed(2)}</b>
+  `;
+    }
+  </script>
+</html>
