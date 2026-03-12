@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora finaceira</title>
+</head>
+<body>
+    <h2> calculadora</h2>
+    <br>
+    <br> 
+    qual é o valor médio total <input id="medio" type="text">
+    <br>
+    quantas peças ficam armazenadas <input id="peças" type="text">
+    <br>
+    quantas peças são danificadas?
+    <input type="text" id="ipt_pecasAfetadas" 
+    /> <br />
+    quantas vezes isso ocorre?
+     <input type="text" id="ipt_renovacaoAnual" 
+     /> <br />
+    <button onclick="impacto()">valor do impacto</button>
+
+    <div id="mofo()"></div>
+    <script>
+
+    function Impacto() {
+      let valorEstoque = Number(medio.value);
+      let pecasTotais = Number(peças.value);
+      let pecasPerdidas = Number(ipt_pecasAfetadas.value);
+      let renovacaoAnual = Number(ipt_renovacaoAnual.value);
+      let EstoquePerdido = pecasPerdidas / pecasTotais;
+      let perdaEmDinheiro = EstoquePerdido * valorEstoque;
+      let prejuizoAnual = perdaEmDinheiro * renovacaoAnual;
+    
+     let percentualPerda = EstoquePerdido * 100;
+
+      let prejuizoComSensor = perdaEmDinheiro * 0.005;
+      let economia = prejuizoAnual - prejuizoComSensor * renovacaoAnual;
+
+      div_exibirImpacto.innerHTML =  ""}
+
+
+      </script>
+</body>
+</html>
